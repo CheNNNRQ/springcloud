@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.diodi.springcloud.dao.PaymentDao">
+<!--  id 对应的方法名  parameterType 参数类型  useGeneratedKeys 返回的东西 -->
+    <insert id="add" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into springcloud.payment(serial) values (#{serial});
+    </insert>
+<!-- resultMap 映射   column 数据库变量名  property java名 jdbcType 数据库类型-->
+    <resultMap id="BaseResultMap" type="com.diodi.springcloud.bean.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="serial" property="serial" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getPaymentById" parameterType="long" resultMap="BaseResultMap">
+        select * from springcloud.payment where id=#{id};
+    </select>
+</mapper>
